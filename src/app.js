@@ -1,30 +1,39 @@
 const express = require('express');
 const cookieParser = require("cookie-parser");
-const path = require("path");
-const mongo = require("mongoose");
+//const path = require("path");
 require('dotenv').config()
 
 const setupLoginRoute = require("./routes/login");
 const setupAddRoute = require("./routes/add");
-
+const userRouter = require("./routes/client.routes");
 const app = express();
 
 
-app.use(
-    express.urlencoded({
-        extended: true
-    })
-);
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 app.use(cookieParser());
 
+app.use('/api', userRouter);
+
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    return res.redirect("login");
+});
+
+app.get("/login", (req, res) => {
+    res.render("login");
 });
   
 app.get("/welcome", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/welcome.html"));
+    res.render("welcome");
 });
 
+
+app.get("*", (req, res)=>{
+    res.send("error!!! No such route!!!");
+});
 
 
 setupLoginRoute(app);
@@ -37,7 +46,7 @@ setupAddRoute(app);
 
 
 
-const PORT = 3030;
+const PORT = process.env.PORT || 3030;
 app.listen(PORT, ()=>{
     console.log(`Listening on port ${PORT} --> http://localhost:${PORT}/`)
 });
