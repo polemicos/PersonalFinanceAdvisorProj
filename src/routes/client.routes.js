@@ -6,6 +6,6 @@ router.post('/client', clientController.createClient);
 router.get('/client/:id', clientController.getClient);
 router.get('/client', clientController.getClients);
 router.put('/client', clientController.updateClient);
-router.post('/client/:id', clientController.deleteClient);
+router.delete('/client/:id', clientController.deleteClient);
 
 module.exports = router;

@@ -5,7 +5,8 @@ require('dotenv').config()
 
 const setupLoginRoute = require("./routes/login");
 const setupAddRoute = require("./routes/add");
-const userRouter = require("./routes/client.routes");
+const clientRouter = require("./routes/client.routes");
+const loanRouter = require("./routes/loan.routes");
 const app = express();
 
 
@@ -16,7 +17,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/api', userRouter);
+app.use('/api', clientRouter);
+app.use('/api', loanRouter);
 
 app.get("/", (req, res) => {
     return res.redirect("login");
