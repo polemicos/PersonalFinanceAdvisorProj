@@ -6,17 +6,17 @@ const getUser = async (username) => {
 };
 
 module.exports = (app) => 
-    app.post("/login", async (req, res) => {
-        const { username, password } = req.body;
+    app.post("/register", async (req, res) => {
+        const { username } = req.body;
         try {
             const client = await getUser(username);
-            if (!client || client.password !== password) {
-                return res.status(403).json({ error: "invalid login" });
+            if (client) {
+                return res.status(403).json({ error: "there's already a user with such username" });
             }
+            
+            let newClient = await clientController.createClient(req, res);
 
-            delete client.password;
-
-            const token = jwt.signJwt(client, process.env.MY_SECRET, 1000);
+            const token = jwt.signJwt(newClient, process.env.MY_SECRET, 1000);
 
             res.cookie("token", token);
 

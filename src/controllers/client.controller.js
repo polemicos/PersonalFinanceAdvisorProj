@@ -8,7 +8,9 @@ class ClientController{
             const newClient = await db.query(`
                 INSERT INTO client (username, password, salary, preferred_currency_id) 
                 values ('${username}', '${password}', ${salary}, ${preferred_currency_id}) RETURNING *;`);
-            res.json(newClient.rows[0]); 
+            //res.json(newClient.rows[0]);
+            console.log("new user: ", newClient.rows[0]);
+            return newClient.rows[0];
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server error");

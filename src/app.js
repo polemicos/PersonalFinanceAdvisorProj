@@ -4,9 +4,11 @@ const cookieParser = require("cookie-parser");
 require('dotenv').config()
 
 const setupLoginRoute = require("./routes/login");
+const setupRegisterRoute = require("./routes/register");
 const setupAddRoute = require("./routes/add");
 const clientRouter = require("./routes/client.routes");
 const loanRouter = require("./routes/loan.routes");
+const { getCurrencyList } = require('./controllers/currency.controller');
 const app = express();
 
 
@@ -21,15 +23,22 @@ app.use('/api', clientRouter);
 app.use('/api', loanRouter);
 
 app.get("/", (req, res) => {
-    return res.redirect("login");
+    return res.redirect("homepage");
 });
 
 app.get("/login", (req, res) => {
     res.render("login");
 });
+
+app.get("/register", async (req, res)=>{
+    const currencyList = await getCurrencyList(req, res);
+    res.render("register", {
+        currencyList: currencyList
+    });
+});
   
-app.get("/welcome", (req, res) => {
-    res.render("welcome");
+app.get("/homepage", (req, res) => {
+    res.render("homepage");
 });
 
 
@@ -40,6 +49,7 @@ app.get("*", (req, res)=>{
 
 setupLoginRoute(app);
 setupAddRoute(app);
+setupRegisterRoute(app);
 
 
 
