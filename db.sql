@@ -23,4 +23,11 @@ CREATE TABLE Loan (
     FOREIGN KEY (client_id) REFERENCES Client(client_id)
 );
 
+INSERT INTO Currency (currency_code, currency_name) VALUES ('USD', 'United States Dollar');
+INSERT INTO Currency (currency_code, currency_name) VALUES ('BYN', 'Belarusian Ruble');
+INSERT INTO Currency (currency_code, currency_name) VALUES ('PLN', 'Polish Zloty');
+INSERT INTO Currency (currency_code, currency_name) VALUES ('EUR', 'Euro');
+INSERT INTO Currency (currency_code, currency_name) VALUES ('GBP', 'British Pound Sterling');
+
+
 

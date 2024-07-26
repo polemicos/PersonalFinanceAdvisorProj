@@ -32,9 +32,9 @@ class CurrencyController{
     }
     
 
-    async deleteLoan(req, res){
+    async deleteCurrnecy(req, res){
         const id = req.params.id;
-        const client = await db.query(`DELETE FROM loan where loan_id =${id}`);
+        const client = await db.query(`DELETE FROM currency where currency_id =${id}`);
         res.json(client.rows[0]);
     }
 }
