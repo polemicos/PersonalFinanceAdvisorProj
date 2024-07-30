@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,13 +10,25 @@
     <body>
       <div class="content">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-              <span class="fs-4"></span>
-            </a>
+            <% if(user){ %>
+              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <span class="fs-4">Client: <%=user%></span>
+              </a>
+            <% }else{ %>
+              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <span class="fs-4"></span>
+              </a>
+            <% } %>
+            
       
             <ul class="nav nav-pills">
               <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Homepage</a></li>
+
+              <%if(!user){%>
               <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
               <li class="nav-item"><a href="/register" class="nav-link">Register</a></li>
+              <%}else{%>
+                <li class="nav-item"><a href="/" class="nav-link">Log out</a></li>
+                <%}%>
             </ul>
           </header>

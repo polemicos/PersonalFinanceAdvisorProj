@@ -45,7 +45,7 @@ class ClientController {
 
     async getClientByUsername(username) {
         try {
-            const client = await db.query(`SELECT username, password FROM client WHERE username = $1`, [username]);
+            const client = await db.query(`SELECT username, password, client_id FROM client WHERE username = $1`, [username]);
             if (client.rows.length > 0) {
                 return client.rows[0];
             } else {

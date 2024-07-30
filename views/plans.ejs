@@ -1,0 +1,8 @@
+
+<%- include('partials/header') %>
+<div class="container">
+    <% Object.keys(loansList).forEach((key) => { %>
+        <p value="<%= key %>"><%= loansList[key] %></p>
+        <% }); %>
+</div>
+<%- include('partials/footer') %>

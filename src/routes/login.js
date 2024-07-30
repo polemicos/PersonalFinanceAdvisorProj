@@ -1,12 +1,13 @@
 const jwt = require("../middleware/jwt");
 const clientController = require("../controllers/client.controller");
+const { cookieJwtAuth } = require("../middleware/cookieJwtAuth");
 
 const getUser = async (username) => {
     return await clientController.getClientByUsername(username);
 };
 
 module.exports = (app) => 
-    app.post("/login", async (req, res) => {
+    app.post("/login", cookieJwtAuth, async (req, res) => {
         const { username, password } = req.body;
         try {
             const client = await getUser(username);

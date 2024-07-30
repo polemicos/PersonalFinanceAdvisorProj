@@ -1,20 +1,20 @@
 const express = require('express');
 const cookieParser = require("cookie-parser");
-//const path = require("path");
 require('dotenv').config()
 
 const setupLoginRoute = require("./routes/login");
 const setupRegisterRoute = require("./routes/register");
-const setupAddRoute = require("./routes/add");
+const setupShowRoute = require("./routes/show");
 const clientRouter = require("./routes/client.routes");
 const loanRouter = require("./routes/loan.routes");
 const { getCurrencyList } = require('./controllers/currency.controller');
+const { cookieJwtAuth } = require('./middleware/cookieJwtAuth');
 const app = express();
 
 
 
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static("views"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
@@ -26,19 +26,24 @@ app.get("/", (req, res) => {
     return res.redirect("homepage");
 });
 
-app.get("/login", (req, res) => {
-    res.render("login");
+app.get("/login", cookieJwtAuth, (req, res) => {
+    res.render("login", {
+        user: req.user ? req.user.payload.username : null
+    });
 });
 
-app.get("/register", async (req, res)=>{
+app.get("/register", cookieJwtAuth, async (req, res)=>{
     const currencyList = await getCurrencyList(req, res);
     res.render("register", {
-        currencyList: currencyList
+        currencyList: currencyList,
+        user: req.user ? req.user.payload.username : null
     });
 });
   
-app.get("/homepage", (req, res) => {
-    res.render("homepage");
+app.get("/homepage", cookieJwtAuth, (req, res) => {
+    res.render("homepage", {
+        user: req.user ? req.user.payload.username : null
+    });
 });
 
 
@@ -48,7 +53,7 @@ app.get("*", (req, res)=>{
 
 
 setupLoginRoute(app);
-setupAddRoute(app);
+setupShowRoute(app);
 setupRegisterRoute(app);
 
 
