@@ -1,8 +1,21 @@
 
 <%- include('partials/header') %>
 <div class="container">
-    <% Object.keys(loansList).forEach((key) => { %>
-        <p value="<%= key %>"><%= loansList[key] %></p>
+    <h1 class="my-4">Loan Plans</h1>
+    <div class="row">
+        <% Object.keys(loansList).forEach(function(key) { %>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Loan for Client ID: <%= loansList[key].client_id %></h5>
+                        <p class="card-text">Desired Interest Rate: <%= loansList[key].desired_interest_rate %>%</p>
+                        <p class="card-text">Max Loan Amount: $<%= loansList[key].max_loan_amount %></p>
+                        <p class="card-text">Repayment Plan: <%= loansList[key].repayment_plan %></p>
+                        <p class="card-text">Total Interest Paid: $<%= loansList[key].total_interest_paid %></p>
+                    </div>
+                </div>
+            </div>
         <% }); %>
+    </div>
 </div>
 <%- include('partials/footer') %>
