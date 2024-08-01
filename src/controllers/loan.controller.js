@@ -21,9 +21,10 @@ class LoanController{
         try {
             const loanResult = await db.query(`SELECT * FROM loan WHERE client_id = $1`, [client_id]);
             const loans = loanResult.rows.reduce((acc, loan) => {
-                acc[loan.id] = loan;
+                acc[loan.loan_id] = loan;
                 return acc;
             }, {});
+            console.log(loans);
             return loans;
         } catch (err) {
             console.error(err.message);

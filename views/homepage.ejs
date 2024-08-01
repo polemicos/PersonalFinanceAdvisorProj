@@ -9,7 +9,7 @@
         
     </div>
     
-
+    <%if(user){%>
     <div>
         <form action="/show" method="post">
             <button type="submit" class="btn btn-primary">Discover your plans</button>
@@ -21,6 +21,11 @@
             <button type="submit" class="btn btn-primary">Make a new plan</button>
         </form>
     </div>
+    <%}else{%>
+    <div>
+        <h3>Please, login or register to proceed!</h3>
+    </div>
+    <%}%>
 </div>
 <%- include('partials/footer') %>
 <!-- ТУДУ:

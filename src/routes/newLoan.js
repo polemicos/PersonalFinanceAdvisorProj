@@ -6,7 +6,9 @@ module.exports = (app) =>
   app.post("/newLoan", cookieJwtAuth, async (req, res) => {
     console.log(req.user);
     let user = req.user.payload.username;
+    let id = req.user.payload.client_id;
     res.render("newLoan",{
-        user: user
+        user: user,
+        id: id
     });
   });
