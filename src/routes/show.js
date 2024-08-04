@@ -3,11 +3,21 @@ const loanController = require("../controllers/loan.controller");
 const clientController = require("../controllers/client.controller");
 const db = require('../db');
 
+
+const getUser = async (username, res) => {
+    return new Promise((resolve, reject) => {
+        clientController.getClientByUsername(username, {
+            json: (data) => resolve(data),
+            status: (code) => ({ json: (error) => reject(error) })
+        });
+    });
+};
+
 module.exports = (app) => {
     app.post("/show", cookieJwtAuth, async (req, res) => {
         try {
             console.log(req.user);
-            let client = await clientController.getClientByUsername(req.user.payload.username);
+            let client = await getUser(req.user.payload.username);
             let loansList = await loanController.getLoanByClient(client.client_id);
             const query = `
                 SELECT c.currency_code

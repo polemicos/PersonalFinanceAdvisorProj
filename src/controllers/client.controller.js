@@ -9,12 +9,10 @@ class ClientController {
                  VALUES ($1, $2, $3, $4) RETURNING *;`,
                 [username, password, salary, preferred_currency_id]
             );
-            console.log("new user: ", newClient.rows[0]);
-            res.status(201).json(newClient.rows[0]);
-            return newClient.rows[0];
+            res.json(newClient.rows[0]);
         } catch (err) {
             console.error(err.message);
-            res.status(500).send("Server error");
+            res.status(500).json({ error: "Server error" });
         }
     }
 
@@ -43,17 +41,13 @@ class ClientController {
         }
     }
 
-    async getClientByUsername(username) {
+    async getClientByUsername(username, res) {
         try {
-            const client = await db.query(`SELECT username, password, client_id FROM client WHERE username = $1`, [username]);
-            if (client.rows.length > 0) {
-                return client.rows[0];
-            } else {
-                return null;
-            }
+            const client = await db.query(`SELECT * FROM client WHERE username = $1`, [username]);
+            res.json(client.rows[0]);
         } catch (err) {
             console.error(err.message);
-            throw new Error('Server error');
+            res.status(500).json({ error: "Error fetching client" });
         }
     }
 
