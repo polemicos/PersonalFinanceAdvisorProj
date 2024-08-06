@@ -22,7 +22,7 @@ module.exports = (app) =>
 
             delete client.password;
 
-            const token = jwt.signJwt(client, process.env.MY_SECRET, 1000);
+            const token = jwt.signJwt(client, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
 
             res.cookie("token", token);
 

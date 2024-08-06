@@ -17,9 +17,9 @@ CREATE TABLE Loan (
     loan_id SERIAL PRIMARY KEY,
     client_id INT NOT NULL,
     desired_interest_rate DECIMAL(4,2) NOT NULL,
-    max_loan_amount DECIMAL(10,2) NOT NULL,
-    repayment_plan TEXT NOT NULL,
-    total_interest_paid DECIMAL(10,2) NOT NULL,
+    max_loan_amount DECIMAL(15,2) NOT NULL,
+    repayment_plan SMALLINT NOT NULL,
+    total_interest_paid DECIMAL(15,2) NOT NULL,
     FOREIGN KEY (client_id) REFERENCES Client(client_id)
 );
 
@@ -30,4 +30,7 @@ INSERT INTO Currency (currency_code, currency_name) VALUES ('EUR', 'Euro');
 INSERT INTO Currency (currency_code, currency_name) VALUES ('GBP', 'British Pound Sterling');
 
 
+INSERT INTO Client (username, password, salary, preferred_currency_id) VALUES ('admin', 'admin', 1, 1);
 
+
+INSERT INTO Loan (client_id, desired_interest_rate, max_loan_amount, repayment_plan, total_interest_paid) VALUES (1, 1, 1, 1, 1);

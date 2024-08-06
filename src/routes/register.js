@@ -31,7 +31,7 @@ module.exports = (app) =>
 
             const newClient = await createClient(req, res);
 
-            const token = jwt.signJwt({username: newClient.username, client_id: newClient.client_id, salary: newClient.salary}, process.env.MY_SECRET, 1000);
+            const token = jwt.signJwt({username: newClient.username, client_id: newClient.client_id, salary: newClient.salary}, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
             res.cookie("token", token);
 
             return res.redirect("homepage");

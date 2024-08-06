@@ -49,7 +49,7 @@ module.exports = (app) =>
         console.log("New Loan Created:", newLoan);
 
         // Redirect after successful loan creation
-        return res.redirect('/plans');
+        return res.redirect('/homepage');
     } catch (err) {
         console.error("Error during loan creation:", err.message);
         return res.status(500).send("Server error");

@@ -13,12 +13,22 @@ const getUser = async (username, res) => {
     });
 };
 
+const getLoanByClient = async (req) => {
+    return new Promise((resolve, reject) => {
+        loanController.getLoanByClient(req, {
+            json: (data) => resolve(data),
+            status: (code) => ({ json: (error) => reject(error) })
+        });
+    });
+};
+
 module.exports = (app) => {
     app.post("/show", cookieJwtAuth, async (req, res) => {
         try {
             console.log(req.user);
-            let client = await getUser(req.user.payload.username);
-            let loansList = await loanController.getLoanByClient(client.client_id);
+            const client = await getUser(req.user.payload.username);
+            req.body.client_id = client.client_id;
+            const loansList = await getLoanByClient(req);
             const query = `
                 SELECT c.currency_code
                 FROM Client AS cl

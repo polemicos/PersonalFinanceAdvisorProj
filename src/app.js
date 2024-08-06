@@ -2,6 +2,8 @@ const express = require('express');
 const cookieParser = require("cookie-parser");
 require('dotenv').config()
 
+
+const setupDB = require("./setupDB");
 const setupLoginRoute = require("./routes/login");
 const setupLogoutRoute = require("./routes/logout");
 const setupRegisterRoute = require("./routes/register");
@@ -25,7 +27,14 @@ app.use(cookieParser());
 app.use('/api', clientRouter);
 app.use('/api', loanRouter);
 
+
+
+let set = false;
 app.get("/", (req, res) => {
+    if(!set){
+        setupDB();
+        set = true;
+    }
     return res.redirect("homepage");
 });
 
@@ -70,7 +79,7 @@ setupCreateNewLoanRoute(app);
 
 
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, ()=>{
     console.log(`Listening on port ${PORT} --> http://localhost:${PORT}/`)
 });

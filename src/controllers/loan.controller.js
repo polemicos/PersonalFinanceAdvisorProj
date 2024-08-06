@@ -20,17 +20,18 @@ class LoanController {
         }
     }
 
-    async getLoanByClient(client_id) {
+    async getLoanByClient(req, res) {
+        const client_id = req.params.client_id || req.body.client_id;
         try {
             const loanResult = await db.query(`SELECT * FROM loan WHERE client_id = $1`, [client_id]);
             const loans = loanResult.rows.reduce((acc, loan) => {
                 acc[loan.loan_id] = loan;
                 return acc;
             }, {});
-            return loans;
+            res.json(loans);
         } catch (err) {
             console.error("Error fetching loans:", err.message);
-            throw new Error("Error fetching loans");
+            res.status(500).json({ error: "Error fetching loans" });
         }
     }
 
