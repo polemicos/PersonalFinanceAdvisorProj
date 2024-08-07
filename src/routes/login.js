@@ -12,7 +12,7 @@ const getUser = async (username, res) => {
 };
 
 module.exports = (app) => 
-    app.post("/login", cookieJwtAuth, async (req, res) => {
+    app.post("/login", async (req, res) => {
         const { username, password } = req.body;
         try {
             const client = await getUser(username, res);
