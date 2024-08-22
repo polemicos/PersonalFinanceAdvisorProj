@@ -22,6 +22,7 @@ This project is a finance management application that allows users to plan and m
 - Programming language - NodeJS
 - Database - PostgreSQL
 - Docker
+
 ---
 
 ## Base URL
@@ -32,14 +33,14 @@ This project is a finance management application that allows users to plan and m
 
 ## API Documentation
 
-### 1. Endpoint `login`:
+### 1. Endpoint `login`
 
 - Endpoint: `login`
 - Standard: JWT
 - Server should answer with status code 403 if login data is invalid and redirect to the homepage with 200 status, if a new user created successfully.
 
 > Request
-> 
+>
 > ```
 > curl -X 'POST' \\\\
 > ‘/login’ \\\\
@@ -51,7 +52,7 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body(in cookies)
-> 
+>
 > ```
 > 
 > {
@@ -60,13 +61,13 @@ This project is a finance management application that allows users to plan and m
 > 
 > ```
 
-### 2. Endpoint  `logout`:
+### 2. Endpoint  `logout`
 
 - Endpoint: `logout`
 - Standard: JWT
 
  Request
-> 
+>
 > ```
 > curl -X 'POST' \\\\
 > ‘/logout’ \\\\
@@ -77,20 +78,20 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
 > No content
 > 
 > ```
 
-### 1. Endpoint `register`:
+### 1. Endpoint `register`
 
 - Endpoint: `register`
 - Standard: JWT
 - Server should answer with status code 403 if user with similar username exists and redirect to the homepage with 200 status, if a new user created successfully.
 
 > Request
-> 
+>
 > ```
 > curl -X 'POST' \\\\
 > ‘/login’ \\\\
@@ -102,20 +103,20 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
+>
 	No content
 
 > ```
 >
-### 2. Endpoint `api/client:
+### 2. Endpoint `api/client`
 
 - GET `api/client` - get all users
-    - Server should answer with status code 200 and all users records.
-
+  - Server should answer with status code 200 and all users records.
 
 > Request
-> 
+>
 > ```
 > curl -X 'GET' \\\\
 > ‘api/client’ \\\\
@@ -123,51 +124,50 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
 > [
-    {
-       "client_id": 1,
-        "username": "admin",
-        "password": "admin",
-        "salary": "1.00",
-        "preferred_currency_id": 1
-    },
-    {
-        "client_id": 2,
-        "username": "adfad",
-        "password": "123",
-        "salary": "12342.00",
-        "preferred_currency_id": 3
-    },
-    {
-        "client_id": 3,
-        "username": "mikita",
-        "password": "123123",
-        "salary": "123123.00",
-        "preferred_currency_id": 5
-    },
-    {
-        "client_id": 4,
-        "username": "mikita1",
-        "password": "123123",
-        "salary": "1233.00",
-        "preferred_currency_id": 4
-    }
-]
+>   {
+>       "client_id": 1,
+>        "username": "admin",
+>        "password": "admin",
+>        "salary": "1.00",
+>        "preferred_currency_id": 1
+>    },
+>    {
+>        "client_id": 2,
+>        "username": "adfad",
+>        "password": "123",
+>        "salary": "12342.00",
+>        "preferred_currency_id": 3
+>    },
+>    {
+>        "client_id": 3,
+>        "username": "mikita",
+>        "password": "123123",
+>        "salary": "123123.00",
+>        "preferred_currency_id": 5
+>    },
+>    {
+>        "client_id": 4,
+>        "username": "mikita1",
+>        "password": "123123",
+>        "salary": "1233.00",
+>        "preferred_currency_id": 4
+>    }
+>]
 > ```
 
-
 - GET `api/client/{id}` - get one user by ID
-    - Server should answer with status code 200 and record with id === userId if it exists
-    - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
+  - Server should answer with status code 200 and record with id === userId if it exists
+  - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
 |Parameter|Type|Required|Description|
 |---|---|---|---|
 |userId|string|yes|user's ID|
 
 > Request
-> 
+>
 > ```
 > curl -X 'GET' \\\\
 > ‘api/client/1’ \\\\
@@ -175,7 +175,7 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
 > {
     "client_id": 1,
@@ -184,14 +184,14 @@ This project is a finance management application that allows users to plan and m
     "salary": "1.00",
     "preferred_currency_id": 1
 }
-> 
+>
 > ```
 
 - POST `api/client` - create record about new user and put it in database. The request body should contain the required information.
-    - Server should answer with status code 201 and newly created record
+  - Server should answer with status code 201 and newly created record
 
 > Request
-> 
+>
 > ```
 > curl -X 'POST' \\\\
 > ‘api/client’  \\\\
@@ -201,11 +201,11 @@ This project is a finance management application that allows users to plan and m
     "salary": 228,
     "preferred_currency_id": 1
 > }'
-> 
+>
 > ```
 
 > Response body
-> 
+>
 > ```
 > {
     "client_id": 5,
@@ -214,19 +214,19 @@ This project is a finance management application that allows users to plan and m
     "salary": "228.00",
     "preferred_currency_id": 1
 }
-> 
+>
 > ```
 
 - PUT `api/client/{id}` - update existing user. The request body should contain the updated information for the product.
-    - Server should answer with status code 200 and update the record
-    - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
+  - Server should answer with status code 200 and update the record
+  - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
 |Parameter|Type|Required|Description|
 |---|---|---|---|
 |userId|string|yes|user's ID|
 
 > Request
-> 
+>
 > ```
 > curl -X 'PUT' \\\\
 > ‘api/client’  \\\\
@@ -234,11 +234,11 @@ This project is a finance management application that allows users to plan and m
     "id": 3,
     "username": "mikita"
 }'
-> 
+>
 > ```
 
 > Response body
-> 
+>
 > ```
 > {
     "client_id": 3,
@@ -247,16 +247,15 @@ This project is a finance management application that allows users to plan and m
     "salary": "123123.00",
     "preferred_currency_id": 5
 }
-> 
+>
 > ```
 
 - DELETE `api/client/{userId}` - delete existing user from database
-    - Server should answer with status code 204 if the record was found and delete the record, returning deleted record
-    - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
-
+  - Server should answer with status code 204 if the record was found and delete the record, returning deleted record
+  - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
 > Request
-> 
+>
 > ```
 > curl -X 'DELETE' \\\\
 > ‘api/client/1’ \\\\
@@ -264,22 +263,21 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
 >{
     No content
   }
-> 
+>
 > ```
 
-### 3. Endpoint `api/loan:
+### 3. Endpoint `api/loan
 
 - POST `api/loan` -  - create record about new user and put it in database. The request body should contain the required information.
-    - Server should answer with status code 201 and newly created record
-
+  - Server should answer with status code 201 and newly created record
 
 > Request
-> 
+>
 > ```
 > curl -X 'POST' \\\\
 > ‘api/loan’
@@ -290,11 +288,11 @@ This project is a finance management application that allows users to plan and m
     "repayment_plan": "1",
     "total_interest_paid": "1"
 } \\\\
-> 
+>
 > ```
 
 > Response body
-> 
+>
 > ```
 >{
     "loan_id": 4,
@@ -304,23 +302,24 @@ This project is a finance management application that allows users to plan and m
     "repayment_plan": 1,
     "total_interest_paid": "1.00"
 }
-> 
+>
 > ```
 
 - GET `api/loan/{client_id}` - get all the loans of a user
-    - Server should answer with status code 200 and records of a user
-    - Server should answer with status code 404 and corresponding message if loans of user with client_id provided is not found
-    - Server should answer with status code 500 and corresponding message if there was an error fetching loans
+  - Server should answer with status code 200 and records of a user
+  - Server should answer with status code 404 and corresponding message if loans of user with client_id provided is not found
+  - Server should answer with status code 500 and corresponding message if there was an error fetching loans
 
 > Request
-> 
+>
 > ```
 > curl -X 'GET' \\\\
 > ‘api/loan/2’ \\\\
 > 
 > ```
+>
 > Response body
-> 
+>
 > ```
 > {
     "2": {
@@ -340,19 +339,15 @@ This project is a finance management application that allows users to plan and m
         "total_interest_paid": "2223.10"
     }
     }
-> 
+>
 > ```
 
 - DELETE `api/loan/{id}` - delete existing loan from database
-    - Server should answer with status code 204 if the record was found and delete the record, returning deleted record
-    - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
-
-|Parameter|Type|Required|Description|
-|---|---|---|---|
-|category|string|Yes|Part of the category of the product to search for.|
+  - Server should answer with status code 204 if the record was found and delete the record, returning deleted record
+  - Server should answer with status code 404 and corresponding message if record doesn't exist
 
 > Request:
-> 
+>
 > ```
 > curl -X 'DELETE' \\\\
 > 'api/loan/2
@@ -360,7 +355,7 @@ This project is a finance management application that allows users to plan and m
 > ```
 
 > Response body
-> 
+>
 > ```
 >{
     "loan_id": 2,
@@ -370,10 +365,8 @@ This project is a finance management application that allows users to plan and m
     "repayment_plan": 11,
     "total_interest_paid": "319.20"
 }
-> 
+>
 > ```
-
-
 
 ### Install
 
@@ -400,7 +393,7 @@ npm install
 
 ### Run in docker container
 
-For running application in Docker container you should have docker installed on your system and running. 
+For running application in Docker container you should have docker installed on your system and running.
 
 Build the image
 
