@@ -5,19 +5,17 @@ async function setupDatabase() {
   const client = new Client({
     user: 'postgres',
     host: 'db',
-    password: 'postgres', // Ensure this is the correct password
+    password: 'postgres',
     port: 5432,
-    database: 'finance', // Name of the pre-configured database
+    database: 'finance', 
   });
 
   try {
     await client.connect();
     console.log('Connected to the database.');
 
-    // Read SQL commands from file
     const sql = await fs.readFile('./db.sql', 'utf8');
 
-    // Execute the SQL commands
     await client.query(sql);
     console.log('Tables created and data inserted successfully.');
 

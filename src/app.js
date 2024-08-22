@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 
 app.get("/login", cookieJwtAuth, (req, res) => {
     res.render("login", {
-        user: req.user.payload ? req.user.payload.username : null
+        user: req.user && req.user.payload ? req.user.payload.username : null
     });
 });
 
@@ -48,7 +48,7 @@ app.get("/register", cookieJwtAuth, async (req, res)=>{
     const currencyList = await getCurrencyList(req, res);
     res.render("register", {
         currencyList: currencyList,
-        user: req.user.payload ? req.user.payload.username : null
+        user: req.user && req.user.payload ? req.user.payload.username : null
     });
 });
   

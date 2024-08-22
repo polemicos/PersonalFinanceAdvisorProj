@@ -1,6 +1,5 @@
 const jwt = require("../middleware/jwt");
 const clientController = require("../controllers/client.controller");
-const { cookieJwtAuth } = require("../middleware/cookieJwtAuth");
 
 const getUser = async (username, res) => {
     return new Promise((resolve, reject) => {
@@ -14,14 +13,22 @@ const getUser = async (username, res) => {
 const createClient = async (req, res) => {
     return new Promise((resolve, reject) => {
         clientController.createClient(req, {
-            json: (data) => resolve(data),
-            status: (code) => ({ json: (error) => reject(error) })
+            status: (code) => ({
+                json: (data) => {
+                    if (code >= 200 && code < 300) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                }
+            })
         });
     });
 };
 
+
 module.exports = (app) => 
-    app.post("/register", cookieJwtAuth, async (req, res) => {
+    app.post("/register", async (req, res) => {
         const { username } = req.body;
         try {
             const client = await getUser(username, res);
@@ -30,8 +37,8 @@ module.exports = (app) =>
             }
 
             const newClient = await createClient(req, res);
-
-            const token = jwt.signJwt({username: newClient.username, client_id: newClient.client_id, salary: newClient.salary}, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
+            delete newClient.password;
+            const token = jwt.signJwt(newClient, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
             res.cookie("token", token);
 
             return res.redirect("homepage");

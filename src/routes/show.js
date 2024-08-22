@@ -16,8 +16,15 @@ const getUser = async (username, res) => {
 const getLoanByClient = async (req) => {
     return new Promise((resolve, reject) => {
         loanController.getLoanByClient(req, {
-            json: (data) => resolve(data),
-            status: (code) => ({ json: (error) => reject(error) })
+            status: (code) => ({
+                json: (data) => {
+                    if (code >= 200 && code < 300) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                }
+            })
         });
     });
 };
@@ -37,7 +44,7 @@ module.exports = (app) => {
                 WHERE cl.client_id = ${client.client_id};
             `;
             let result = await db.query(query);
-            let currency_code = result.rows[0]?.currency_code; // Extract currency_code if available
+            let currency_code = result.rows[0]?.currency_code;
             console.log(currency_code);
             res.render("plans", {
                 loansList: loansList,

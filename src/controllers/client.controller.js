@@ -9,7 +9,7 @@ class ClientController {
                  VALUES ($1, $2, $3, $4) RETURNING *;`,
                 [username, password, salary, preferred_currency_id]
             );
-            res.json(newClient.rows[0]);
+            res.status(201).json(newClient.rows[0]);
         } catch (err) {
             console.error(err.message);
             res.status(500).json({ error: "Server error" });
@@ -31,7 +31,7 @@ class ClientController {
         try {
             const client = await db.query(`SELECT * FROM client WHERE client_id = $1`, [id]);
             if (client.rows.length > 0) {
-                res.json(client.rows[0]);
+                res.status(200).json(client.rows[0]);
             } else {
                 res.status(404).json({ error: 'Client not found' });
             }
@@ -59,7 +59,7 @@ class ClientController {
                 [username, id]
             );
             if (client.rows.length > 0) {
-                res.json(client.rows[0]);
+                res.status(200).json(client.rows[0]);
             } else {
                 res.status(404).json({ error: 'Client not found' });
             }
@@ -74,7 +74,7 @@ class ClientController {
         try {
             const client = await db.query(`DELETE FROM client WHERE client_id = $1 RETURNING *`, [id]);
             if (client.rows.length > 0) {
-                res.json(client.rows[0]);
+                res.status(204).json(client.rows[0]);
             } else {
                 res.status(404).json({ error: 'Client not found' });
             }

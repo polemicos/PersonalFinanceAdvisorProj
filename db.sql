@@ -20,7 +20,7 @@ CREATE TABLE Loan (
     max_loan_amount DECIMAL(15,2) NOT NULL,
     repayment_plan SMALLINT NOT NULL,
     total_interest_paid DECIMAL(15,2) NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES Client(client_id)
+    FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE
 );
 
 INSERT INTO Currency (currency_code, currency_name) VALUES ('USD', 'United States Dollar');
