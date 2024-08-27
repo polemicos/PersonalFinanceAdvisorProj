@@ -66,7 +66,7 @@ This project is a finance management application that allows users to plan and m
 - Endpoint: `logout`
 - Standard: JWT
 
- Request
+> Request
 >
 > ```
 > curl -X 'POST' \\\\
@@ -76,7 +76,7 @@ This project is a finance management application that allows users to plan and m
 > }
 > 
 > ```
-
+>
 > Response body
 >
 > ```
@@ -101,13 +101,13 @@ This project is a finance management application that allows users to plan and m
 > }
 > 
 > ```
-
+>
 > Response body
 >
 > ```
 >
-	No content
-
+> No content
+>
 > ```
 >
 ### 2. Endpoint `api/client`
@@ -122,7 +122,7 @@ This project is a finance management application that allows users to plan and m
 > ‘api/client’ \\\\
 > 
 > ```
-
+>
 > Response body
 >
 > ```
@@ -162,9 +162,6 @@ This project is a finance management application that allows users to plan and m
   - Server should answer with status code 200 and record with id === userId if it exists
   - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
-|Parameter|Type|Required|Description|
-|---|---|---|---|
-|userId|string|yes|user's ID|
 
 > Request
 >
@@ -173,17 +170,17 @@ This project is a finance management application that allows users to plan and m
 > ‘api/client/1’ \\\\
 > 
 > ```
-
+>
 > Response body
 >
 > ```
 > {
-    "client_id": 1,
-    "username": "admin",
-    "password": "admin",
-    "salary": "1.00",
-    "preferred_currency_id": 1
-}
+>    "client_id": 1,
+>    "username": "admin",
+>    "password": "admin",
+>    "salary": "1.00",
+>    "preferred_currency_id": 1
+>}
 >
 > ```
 
@@ -196,24 +193,24 @@ This project is a finance management application that allows users to plan and m
 > curl -X 'POST' \\\\
 > ‘api/client’  \\\\
 > -d '{
-    "username": "test",
-    "password": "tsst",
-    "salary": 228,
-    "preferred_currency_id": 1
+>    "username": "test",
+>    "password": "tsst",
+>    "salary": 228,
+>    "preferred_currency_id": 1
 > }'
 >
 > ```
-
+>
 > Response body
 >
 > ```
 > {
-    "client_id": 5,
-    "username": "test",
-    "password": "tsst",
-    "salary": "228.00",
-    "preferred_currency_id": 1
-}
+>    "client_id": 5,
+>    "username": "test",
+>    "password": "tsst",
+>    "salary": "228.00",
+>    "preferred_currency_id": 1
+>}
 >
 > ```
 
@@ -221,9 +218,6 @@ This project is a finance management application that allows users to plan and m
   - Server should answer with status code 200 and update the record
   - Server should answer with status code 404 and corresponding message if record with id === userId doesn't exist
 
-|Parameter|Type|Required|Description|
-|---|---|---|---|
-|userId|string|yes|user's ID|
 
 > Request
 >
@@ -231,22 +225,22 @@ This project is a finance management application that allows users to plan and m
 > curl -X 'PUT' \\\\
 > ‘api/client’  \\\\
 > -d '{
-    "id": 3,
-    "username": "mikita"
-}'
+>    "id": 3,
+>    "username": "mikita"
+>}'
 >
 > ```
-
+>
 > Response body
 >
 > ```
 > {
-    "client_id": 3,
-    "username": "mikita",
-    "password": "123123",
-    "salary": "123123.00",
-    "preferred_currency_id": 5
-}
+>    "client_id": 3,
+>    "username": "mikita",
+>    "password": "123123",
+>    "salary": "123123.00",
+>    "preferred_currency_id": 5
+>}
 >
 > ```
 
@@ -261,13 +255,13 @@ This project is a finance management application that allows users to plan and m
 > ‘api/client/1’ \\\\
 > 
 > ```
-
+>
 > Response body
 >
 > ```
 >{
-    No content
-  }
+>    No content
+>  }
 >
 > ```
 
@@ -282,26 +276,26 @@ This project is a finance management application that allows users to plan and m
 > curl -X 'POST' \\\\
 > ‘api/loan’
 > -d '{
-    "client_id": 2,
-    "desired_interest_rate": "1",
-    "max_loan_amount": "1",
-    "repayment_plan": "1",
-    "total_interest_paid": "1"
-} \\\\
+>    "client_id": 2,
+>    "desired_interest_rate": "1",
+>    "max_loan_amount": "1",
+>    "repayment_plan": "1",
+>    "total_interest_paid": "1"
+>} \\\\
 >
 > ```
-
+>
 > Response body
 >
 > ```
 >{
-    "loan_id": 4,
-    "client_id": 2,
-    "desired_interest_rate": "1.00",
-    "max_loan_amount": "1.00",
-    "repayment_plan": 1,
-    "total_interest_paid": "1.00"
-}
+>    "loan_id": 4,
+>    "client_id": 2,
+>    "desired_interest_rate": "1.00",
+>    "max_loan_amount": "1.00",
+>    "repayment_plan": 1,
+>    "total_interest_paid": "1.00"
+>}
 >
 > ```
 
@@ -322,23 +316,23 @@ This project is a finance management application that allows users to plan and m
 >
 > ```
 > {
-    "2": {
-        "loan_id": 2,
-        "client_id": 2,
-        "desired_interest_rate": "23.00",
-        "max_loan_amount": "1514.10",
-        "repayment_plan": 11,
-        "total_interest_paid": "319.20"
-    },
-    "3": {
-        "loan_id": 3,
-        "client_id": 2,
-        "desired_interest_rate": "99.00",
-        "max_loan_amount": "2449.70",
-        "repayment_plan": 11,
-        "total_interest_paid": "2223.10"
-    }
-    }
+>    "2": {
+>        "loan_id": 2,
+>        "client_id": 2,
+>        "desired_interest_rate": "23.00",
+>        "max_loan_amount": "1514.10",
+>        "repayment_plan": 11,
+>        "total_interest_paid": "319.20"
+>    },
+>    "3": {
+>        "loan_id": 3,
+>        "client_id": 2,
+>        "desired_interest_rate": "99.00",
+>        "max_loan_amount": "2449.70",
+>        "repayment_plan": 11,
+>        "total_interest_paid": "2223.10"
+>    }
+>    }
 >
 > ```
 
@@ -353,18 +347,18 @@ This project is a finance management application that allows users to plan and m
 > 'api/loan/2
 > 
 > ```
-
+>
 > Response body
 >
 > ```
 >{
-    "loan_id": 2,
-    "client_id": 2,
-    "desired_interest_rate": "23.00",
-    "max_loan_amount": "1514.10",
-    "repayment_plan": 11,
-    "total_interest_paid": "319.20"
-}
+>    "loan_id": 2,
+>    "client_id": 2,
+>    "desired_interest_rate": "23.00",
+>    "max_loan_amount": "1514.10",
+>    "repayment_plan": 11,
+>    "total_interest_paid": "319.20"
+>}
 >
 > ```
 
@@ -415,5 +409,16 @@ Stop app
 
 ```
 docker compose down
+
+```
+
+
+### Test
+
+After building the whole thing, you can run the tests to be sure everything's okay :)
+
+
+```
+docker compose up test -d
 
 ```

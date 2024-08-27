@@ -5,8 +5,15 @@ const db = require('../db');
 const createLoan = async (req) => {
     return new Promise((resolve, reject) => {
         loanController.createLoan(req, {
-            json: (data) => resolve(data),
-            status: (code) => ({ json: (error) => reject(error) })
+            status: (code) => ({
+                json: (data) => {
+                    if (code >= 200 && code < 300) {
+                        resolve(data);
+                    } else {
+                        reject(data);
+                    }
+                }
+            })
         });
     });
 };
