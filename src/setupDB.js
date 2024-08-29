@@ -7,7 +7,7 @@ async function setupDatabase() {
     host: 'db',
     password: 'postgres',
     port: 5432,
-    database: 'finance', 
+    database: 'finance',
   });
 
   try {

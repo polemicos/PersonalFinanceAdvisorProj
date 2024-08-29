@@ -20,7 +20,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("views"));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -31,7 +31,7 @@ app.use('/api', loanRouter);
 
 let set = false;
 app.get("/", (req, res) => {
-    if(!set){
+    if (!set) {
         setupDB();
         set = true;
     }
@@ -44,14 +44,14 @@ app.get("/login", cookieJwtAuth, (req, res) => {
     });
 });
 
-app.get("/register", cookieJwtAuth, async (req, res)=>{
+app.get("/register", cookieJwtAuth, async (req, res) => {
     const currencyList = await getCurrencyList(req, res);
     res.render("register", {
         currencyList: currencyList,
         user: req.user && req.user.payload ? req.user.payload.username : null
     });
 });
-  
+
 app.get("/homepage", cookieJwtAuth, (req, res) => {
     //console.log(req.user);
     res.render("homepage", {
@@ -60,7 +60,7 @@ app.get("/homepage", cookieJwtAuth, (req, res) => {
 });
 
 
-app.get("*", (req, res)=>{
+app.get("*", (req, res) => {
     res.send("error!!! No such route!!!");
 });
 

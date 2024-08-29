@@ -26,8 +26,8 @@ function signJwt(payload, secret, exp) {
     typ: 'JWT'
   };
   const encodedHeader = base64UrlEncode(JSON.stringify(header));
-  payload.iat = Math.floor(Date.now()/1000);
-  payload.exp = Math.floor(Date.now()/1000) + exp;
+  payload.iat = Math.floor(Date.now() / 1000);
+  payload.exp = Math.floor(Date.now() / 1000) + exp;
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
 
   const signature = crypto

@@ -18,7 +18,7 @@ class ClientController {
 
     async getClients(req, res) {
         try {
-            const clients = await db.query('SELECT * FROM client');
+            const clients = await db.query('SELECT client_id, username, salary, preferred_currency_id FROM client');
             res.json(clients.rows);
         } catch (err) {
             console.error(err.message);
@@ -29,7 +29,7 @@ class ClientController {
     async getClient(req, res) {
         const id = req.params.id;
         try {
-            const client = await db.query(`SELECT * FROM client WHERE client_id = $1`, [id]);
+            const client = await db.query(`SELECT client_id, username, salary, preferred_currency_id FROM client WHERE client_id = $1`, [id]);
             if (client.rows.length > 0) {
                 res.status(200).json(client.rows[0]);
             } else {
@@ -43,7 +43,7 @@ class ClientController {
 
     async getClientByUsername(username, res) {
         try {
-            const client = await db.query(`SELECT * FROM client WHERE username = $1`, [username]);
+            const client = await db.query(`SELECT client_id, username, password, salary, preferred_currency_id FROM client WHERE username = $1`, [username]);
             res.json(client.rows[0]);
         } catch (err) {
             console.error(err.message);
