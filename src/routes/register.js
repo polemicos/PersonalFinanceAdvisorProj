@@ -1,5 +1,6 @@
 const jwt = require("../middleware/jwt");
 const clientController = require("../controllers/client.controller");
+const { cookieJwtAuth } = require("../middleware/cookieJwtAuth");
 
 const getUser = async (username, res) => {
     return new Promise((resolve, reject) => {
@@ -27,7 +28,7 @@ const createClient = async (req, res) => {
 };
 
 
-module.exports = (app) => 
+module.exports = (app) =>
     app.post("/register", async (req, res) => {
         const { username } = req.body;
         try {
@@ -38,7 +39,7 @@ module.exports = (app) =>
 
             const newClient = await createClient(req, res);
             delete newClient.password;
-            const token = jwt.signJwt(newClient, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
+            const token = jwt.signJwt(newClient, process.env.MY_SECRET ? process.env.MY_SECRET : "secret", 1000);
             res.cookie("token", token);
 
             return res.redirect("homepage");

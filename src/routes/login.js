@@ -1,5 +1,6 @@
 const jwt = require("../middleware/jwt");
 const clientController = require("../controllers/client.controller");
+const { cookieJwtAuth } = require("../middleware/cookieJwtAuth");
 
 const getUser = async (username, res) => {
     return new Promise((resolve, reject) => {
@@ -10,7 +11,7 @@ const getUser = async (username, res) => {
     });
 };
 
-module.exports = (app) => 
+module.exports = (app) =>
     app.post("/login", async (req, res) => {
         const { username, password } = req.body;
         try {
@@ -21,7 +22,7 @@ module.exports = (app) =>
 
             delete client.password;
 
-            const token = jwt.signJwt(client, process.env.MY_SECRET? process.env.MY_SECRET:"secret", 1000);
+            const token = jwt.signJwt(client, process.env.MY_SECRET ? process.env.MY_SECRET : "secret", 1000);
 
             res.cookie("token", token);
 
