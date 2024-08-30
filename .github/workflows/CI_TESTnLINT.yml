@@ -10,6 +10,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Run Prettier Auto-Fix
+        run: |
+          npm install prettier
+          npx prettier --write "**/*.{js,ejs,sql,md}"
+        shell: bash
+      
       - name: Run Super-Linter
         uses: github/super-linter@latest
         env:
@@ -33,7 +39,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Run Tests
-        run: docker-compose up --build test
+        run: docker compose up --build test
 
 
       - name: Tear down Docker Compose
